@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,10 +15,11 @@ import javax.servlet.http.HttpSession;
 
 
 public class GetResult extends HttpServlet {
-	String path = "oracle.jdbc.driver.OracleDriver";
-	String url = "jdbc:oracle:thin:@localhost:1521:xe";
-	String un = "system";
-	String pass = "system";
+	String path = null;
+	String url = null;
+	String un = null;
+	String pass = null;
+	ServletConfig sc = null;
 	java.sql.Connection con = null;
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
@@ -30,6 +32,11 @@ public class GetResult extends HttpServlet {
 		//Intialization logic
 		try 
 		{
+			sc= getServletConfig();
+			path = sc.getInitParameter("path");
+			url = sc.getInitParameter("url");
+			un = sc.getInitParameter("un");
+			pass = sc.getInitParameter("pass");
 			Class.forName(path);
 			con = DriverManager.getConnection(url, un, pass);
 			
