@@ -1,2 +1,2 @@
 Servlet Programs
-Uses Init,Service,Destroy
+Uses Init,Service and Destroy
